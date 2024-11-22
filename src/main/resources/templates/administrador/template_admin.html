@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Admin - Panelazo</title>
+
+</head>
+
+<body class="bg-gray-50 h-screen">
+<!-- Navigation for admin -->
+<div th:fragment="header">
+	<nav class="fixed w-full bg-white shadow-sm z-50">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="flex justify-between h-16 items-center">
+				<!-- Logo -->
+				<div class="flex items-center">
+					<a th:href="@{/administrador}" class="text-xl font-bold text-amber-600">
+						Panelazo Admin
+					</a>
+				</div>
+
+				<!-- Search Bar -->
+				<div class="flex-1 max-w-md px-4">
+					<form class="relative" method="post" action="#">
+						<input type="search"
+							   name="nombre"
+							   class="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-amber-500"
+							   placeholder="Buscar"
+							   aria-label="Search"
+							   autocomplete="off">
+						<button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-amber-600">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+								<path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+							</svg>
+						</button>
+					</form>
+				</div>
+
+				<!-- Admin Menu -->
+				<div class="relative group">
+					<button class="flex items-center space-x-2 text-gray-700 hover:text-amber-600 transition-colors">
+						<span class="font-medium">ADMIN</span>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+						</svg>
+					</button>
+					<div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden group-hover:block">
+						<a th:href="@{/productos}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-amber-50">
+							Productos
+						</a>
+						<a th:href="@{/administrador/usuarios}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-amber-50">
+							Usuarios
+						</a>
+						<a th:href="@{/administrador/ordenes}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-amber-50">
+							Ordenes
+						</a>
+						<div class="border-t border-gray-100"></div>
+						<a th:href="@{/usuario/cerrar}" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+							Salir
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+</div>
+
+<!-- Footer -->
+
+</body>
+
+</html>

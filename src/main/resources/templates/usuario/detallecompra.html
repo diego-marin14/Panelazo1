@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Detalle de Compra - Panelazo</title>
+
+	<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50">
+<!-- Navigation -->
+<div th:include="usuario/template_usuario.html::header" th:if="${sesion==null}"></div>
+<div th:include="usuario/template_usuario.html::header-user" th:unless="${sesion==null}"></div>
+
+<!-- Page Content -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+	<!-- Breadcrumbs -->
+	<nav class="flex mb-8" aria-label="Breadcrumb">
+		<ol class="inline-flex items-center space-x-1 md:space-x-3">
+			<li class="inline-flex items-center">
+				<a th:href="@{/}" class="text-gray-700 hover:text-amber-600 transition-colors">
+					Home
+				</a>
+			</li>
+			<li>
+				<div class="flex items-center">
+					<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+						<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+					</svg>
+					<a th:href="@{/usuario/compras}" class="text-gray-700 hover:text-amber-600 transition-colors">
+						Compras
+					</a>
+				</div>
+			</li>
+			<li>
+				<div class="flex items-center">
+					<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+						<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+					</svg>
+					<span class="text-gray-500">Detalle de Compra</span>
+				</div>
+			</li>
+		</ol>
+	</nav>
+
+	<!-- Page Header -->
+	<div class="mb-8">
+		<h1 class="text-3xl font-bold text-gray-900">
+			Detalle de la Compra
+		</h1>
+		<p class="mt-2 text-gray-600">
+			Información detallada de tu pedido
+		</p>
+	</div>
+
+	<!-- Order Details Card -->
+	<div class="bg-white rounded-lg shadow-sm overflow-hidden">
+		<div class="px-4 py-5 sm:p-6">
+			<div class="overflow-x-auto">
+				<table class="min-w-full divide-y divide-gray-200">
+					<thead class="bg-gray-50">
+					<tr>
+						<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+							Cantidad
+						</th>
+						<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+							Producto
+						</th>
+						<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+							Precio
+						</th>
+						<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+							Total
+						</th>
+					</tr>
+					</thead>
+					<tbody class="bg-white divide-y divide-gray-200">
+					<tr th:each="detalle:${detalles}">
+						<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" th:text="${detalle.cantidad}"></td>
+						<td class="px-6 py-4 whitespace-nowrap">
+							<div class="text-sm font-medium text-gray-900" th:text="${detalle.nombre}"></div>
+						</td>
+						<td class="px-6 py-4 whitespace-nowrap">
+							<div class="text-sm text-gray-900" th:text="${detalle.precio}"></div>
+						</td>
+						<td class="px-6 py-4 whitespace-nowrap">
+							<div class="text-sm font-medium text-amber-600" th:text="${detalle.total}"></div>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Footer -->
+<div th:include="usuario/template_usuario.html::footer"></div>
+</body>
+
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Actualizar Producto - Panelazo</title>
+
+	<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 h-screen">
+<!-- Navigation -->
+<div th:include="administrador/template_admin.html::header"></div>
+
+<!-- Page Content -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+	<!-- Breadcrumbs -->
+	<nav class="flex mb-8" aria-label="Breadcrumb">
+		<ol class="inline-flex items-center space-x-1 md:space-x-3">
+			<li class="inline-flex items-center">
+				<a th:href="@{/administrador}" class="text-gray-700 hover:text-amber-600 transition-colors">
+					Home
+				</a>
+			</li>
+			<li>
+				<div class="flex items-center">
+					<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+						<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+					</svg>
+					<span class="text-gray-500">Actualizar Producto</span>
+				</div>
+			</li>
+		</ol>
+	</nav>
+
+	<!-- Page Header -->
+	<div class="mb-8">
+		<h1 class="text-3xl font-bold text-gray-900">
+			Actualizar Producto
+		</h1>
+		<p class="mt-2 text-gray-600">
+			Modifica los detalles del producto existente
+		</p>
+	</div>
+
+	<!-- Product Update Form -->
+	<div class="bg-white rounded-lg shadow-sm overflow-hidden">
+		<form class="p-8" th:action="@{/productos/update}" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="id" th:value="${producto.id}">
+
+			<div class="space-y-6">
+				<!-- Nombre Field -->
+				<div>
+					<label for="nombre" class="block text-sm font-medium text-gray-700">
+						Nombre
+					</label>
+					<div class="mt-1">
+						<input
+								type="text"
+								id="nombre"
+								name="nombre"
+								required
+								autocomplete="off"
+								th:value="${producto.nombre}"
+								placeholder="Ingrese el nombre del producto"
+								class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+						>
+					</div>
+				</div>
+
+				<!-- Descripción Field -->
+				<div>
+					<label for="descripcion" class="block text-sm font-medium text-gray-700">
+						Descripción
+					</label>
+					<div class="mt-1">
+                            <textarea
+									id="descripcion"
+									name="descripcion"
+									rows="4"
+									required
+									autocomplete="off"
+									placeholder="Ingrese la descripción del producto"
+									class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+									th:text="${producto.descripcion}"
+							></textarea>
+					</div>
+				</div>
+
+				<!-- Cantidad Field -->
+				<div>
+					<label for="cantidad" class="block text-sm font-medium text-gray-700">
+						Cantidad
+					</label>
+					<div class="mt-1">
+						<input
+								type="number"
+								id="cantidad"
+								name="cantidad"
+								required
+								autocomplete="off"
+								th:value="${producto.cantidad}"
+								placeholder="Ingrese la cantidad del producto"
+								class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+						>
+					</div>
+				</div>
+
+				<!-- Precio Field -->
+				<div>
+					<label for="precio" class="block text-sm font-medium text-gray-700">
+						Precio
+					</label>
+					<div class="mt-1">
+						<input
+								type="number"
+								step="any"
+								id="precio"
+								name="precio"
+								required
+								autocomplete="off"
+								th:value="${producto.precio}"
+								placeholder="Ingrese el precio del producto"
+								class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+						>
+					</div>
+				</div>
+
+				<!-- Current Image Preview -->
+				<div>
+					<label class="block text-sm font-medium text-gray-700">
+						Imagen Actual
+					</label>
+					<div class="mt-1">
+						<img
+								th:if="${producto.imagen != null}"
+								th:src="@{/images/{img} (img=${producto.imagen})}"
+								alt="Imagen actual del producto"
+								class="h-32 w-32 object-cover rounded-lg"
+						>
+					</div>
+				</div>
+
+				<!-- Image Upload Field -->
+				<div>
+					<label for="img" class="block text-sm font-medium text-gray-700">
+						Nueva Imagen
+					</label>
+					<div class="mt-1">
+						<div class="flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+							<div class="space-y-1 text-center">
+								<svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+									<path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+								</svg>
+								<div class="flex text-sm text-gray-600">
+									<label for="img" class="relative cursor-pointer bg-white rounded-md font-medium text-amber-600 hover:text-amber-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-amber-500">
+										<span>Subir nueva imagen</span>
+										<input id="img" name="img" type="file" class="sr-only">
+									</label>
+									<p class="pl-1">o arrastrar y soltar</p>
+								</div>
+								<p class="text-xs text-gray-500">
+									PNG, JPG, GIF hasta 10MB
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Submit Button -->
+				<div class="pt-4">
+					<button
+							type="submit"
+							class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors"
+					>
+						<svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+							<path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+						</svg>
+						Guardar Cambios
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+</body>
+
+</html>

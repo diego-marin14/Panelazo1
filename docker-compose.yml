@@ -1,0 +1,24 @@
+services:
+#  app:
+#    image: 'panelazo:lastet'
+#    build:
+#      context: .
+#    container_name: app
+#    depends_on:
+#      - postgres
+#    ports:
+#      - "8080:8080"
+
+  postgres:
+    image: postgres:latest  # You can specify a version like 'postgres:15' if needed
+    environment:
+      POSTGRES_DB: panelazo
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

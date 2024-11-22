@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Usuarios - Panelazo</title>
+
+	<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 h-screen">
+<!-- Navigation -->
+<div th:include="administrador/template_admin.html::header"></div>
+
+<!-- Page Content -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+	<!-- Breadcrumbs -->
+	<nav class="flex mb-8" aria-label="Breadcrumb">
+		<ol class="inline-flex items-center space-x-1 md:space-x-3">
+			<li class="inline-flex items-center">
+				<a th:href="@{/administrador}" class="text-gray-700 hover:text-amber-600 transition-colors">
+					Home
+				</a>
+			</li>
+			<li>
+				<div class="flex items-center">
+					<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+						<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+					</svg>
+					<span class="text-gray-500">Usuarios</span>
+				</div>
+			</li>
+		</ol>
+	</nav>
+
+	<!-- Page Header -->
+	<div class="mb-8">
+		<h1 class="text-3xl font-bold text-gray-900">
+			Gestión de Usuarios
+		</h1>
+		<p class="mt-2 text-gray-600">
+			Administra los usuarios registrados en Panelazo
+		</p>
+	</div>
+
+	<!-- Users Table Card -->
+	<div class="bg-white rounded-lg shadow-sm overflow-hidden">
+		<div class="px-4 py-5 sm:p-6">
+			<div class="overflow-x-auto">
+				<table class="min-w-full divide-y divide-gray-200">
+					<thead class="bg-gray-50">
+					<tr>
+						<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+							Nombre
+						</th>
+						<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+							Email
+						</th>
+						<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+							Dirección
+						</th>
+						<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+							Estado
+						</th>
+					</tr>
+					</thead>
+					<tbody class="bg-white divide-y divide-gray-200">
+					<tr th:each="usuario:${usuarios}">
+						<td class="px-6 py-4 whitespace-nowrap">
+							<div class="flex items-center">
+								<div class="flex-shrink-0 h-10 w-10">
+									<div class="h-10 w-10 rounded-full bg-amber-100 flex items-center justify-center">
+                                                <span class="text-amber-600 font-medium" th:text="${#strings.substring(usuario.nombre,0,1)}">
+                                                </span>
+									</div>
+								</div>
+								<div class="ml-4">
+									<div class="text-sm font-medium text-gray-900" th:text="${usuario.nombre}"></div>
+								</div>
+							</div>
+						</td>
+						<td class="px-6 py-4 whitespace-nowrap">
+							<div class="text-sm text-gray-900" th:text="${usuario.email}"></div>
+						</td>
+						<td class="px-6 py-4 whitespace-nowrap">
+							<div class="text-sm text-gray-900" th:text="${usuario.direccion}"></div>
+						</td>
+						<td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        Activo
+                                    </span>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+
+</html>

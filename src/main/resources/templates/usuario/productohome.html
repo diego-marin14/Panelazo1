@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Detalle del Producto - Panelazo</title>
+
+	<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50">
+<!-- Navigation -->
+<div th:include="usuario/template_usuario.html::header"></div>
+
+<!-- Page Content -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+	<!-- Breadcrumbs -->
+	<nav class="flex mb-8" aria-label="Breadcrumb">
+		<ol class="inline-flex items-center space-x-1 md:space-x-3">
+			<li class="inline-flex items-center">
+				<a th:href="@{/}" class="text-gray-700 hover:text-amber-600 transition-colors">
+					Home
+				</a>
+			</li>
+			<li>
+				<div class="flex items-center">
+					<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+						<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+					</svg>
+					<span class="text-gray-500">Producto</span>
+				</div>
+			</li>
+		</ol>
+	</nav>
+
+	<!-- Product Detail Card -->
+	<div class="bg-white rounded-lg shadow-sm overflow-hidden">
+		<div class="p-6">
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+				<!-- Product Image -->
+				<div class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-100">
+					<img
+							th:src="@{/images/{img} (img=${producto.imagen})}"
+							alt="Imagen del producto"
+							class="h-full w-full object-cover object-center"
+					>
+				</div>
+
+				<!-- Product Info -->
+				<div>
+					<form th:action="@{/cart}" method="POST" class="space-y-6">
+						<input type="hidden" th:value="${producto.id}" name="id">
+
+						<!-- Product Name -->
+						<h1 class="text-2xl font-bold text-gray-900" th:text="${producto.nombre}"></h1>
+
+						<!-- Product Details -->
+						<div class="space-y-4">
+							<!-- Price -->
+							<div class="bg-gray-50 rounded-lg p-4">
+								<h2 class="text-lg font-medium text-gray-900">
+									Precio: <span class="text-amber-600" th:text="${producto.precio}"></span>
+								</h2>
+							</div>
+
+							<!-- Description -->
+							<div class="bg-gray-50 rounded-lg p-4">
+								<h3 class="text-sm font-medium text-gray-900 mb-2">Descripción</h3>
+								<p class="text-gray-700" th:text="${producto.descripcion}"></p>
+							</div>
+
+							<!-- Quantity -->
+							<div class="bg-gray-50 rounded-lg p-4">
+								<label for="cantidad" class="block text-sm font-medium text-gray-700 mb-2">
+									Cantidad
+								</label>
+								<div class="mt-1 relative rounded-md shadow-sm max-w-[120px]">
+									<input
+											type="number"
+											id="cantidad"
+											name="cantidad"
+											min="1"
+											max="10"
+											value="1"
+											autocomplete="off"
+											class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-amber-500 focus:border-amber-500 rounded-md"
+									>
+								</div>
+							</div>
+						</div>
+
+						<!-- Add to Cart Button -->
+						<button
+								type="submit"
+								class="w-full flex items-center justify-center px-6 py-3 border border-transparent rounded-full text-base font-medium text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors"
+						>
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+								<path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+							</svg>
+							Añadir al carrito
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Footer -->
+<div th:include="usuario/template_usuario.html::footer"></div>
+</body>
+
+</html>

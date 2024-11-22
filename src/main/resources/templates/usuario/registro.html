@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Registro</title>
+
+	<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50">
+<!-- Navigation -->
+<div th:include="usuario/template_usuario.html::header"></div>
+
+<!-- Page Content -->
+<div class="min-h-screen pt-24 pb-12">
+	<div class="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="bg-white rounded-lg shadow-sm p-8">
+			<!-- Header -->
+			<div class="text-center mb-8">
+				<h2 class="text-2xl font-bold text-gray-900">Crear una cuenta</h2>
+				<p class="mt-2 text-sm text-gray-600">
+					Únete a Panelazo y disfruta de nuestros productos
+				</p>
+			</div>
+
+			<!-- Registration Form -->
+			<form th:action="@{/usuario/save}" method="post" class="space-y-6">
+				<!-- Nombre Field -->
+				<div>
+					<label for="nombre" class="block text-sm font-medium text-gray-700">
+						Nombres
+					</label>
+					<div class="mt-1">
+						<input
+								type="text"
+								id="nombre"
+								name="nombre"
+								required
+								autocomplete="off"
+								placeholder="Ingrese sus nombres"
+								class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+						>
+					</div>
+				</div>
+
+				<!-- Email Field -->
+				<div>
+					<label for="email" class="block text-sm font-medium text-gray-700">
+						Email
+					</label>
+					<div class="mt-1">
+						<input
+								type="email"
+								id="email"
+								name="email"
+								required
+								autocomplete="off"
+								placeholder="Ingrese su email"
+								class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+						>
+					</div>
+				</div>
+
+				<!-- Dirección Field -->
+				<div>
+					<label for="direccion" class="block text-sm font-medium text-gray-700">
+						Dirección
+					</label>
+					<div class="mt-1">
+						<input
+								type="text"
+								id="direccion"
+								name="direccion"
+								required
+								autocomplete="off"
+								placeholder="Ingrese su dirección"
+								class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+						>
+					</div>
+				</div>
+
+				<!-- Password Field -->
+				<div>
+					<label for="password" class="block text-sm font-medium text-gray-700">
+						Contraseña
+					</label>
+					<div class="mt-1">
+						<input
+								type="password"
+								id="password"
+								name="password"
+								required
+								autocomplete="off"
+								placeholder="Ingrese su contraseña"
+								class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500"
+						>
+					</div>
+				</div>
+
+				<!-- Submit Button -->
+				<div>
+					<button
+							type="submit"
+							class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors duration-200"
+					>
+						Registrarse
+					</button>
+				</div>
+			</form>
+
+			<!-- Login Link -->
+			<div class="mt-6 text-center">
+				<a
+						th:href="@{/usuario/login}"
+						class="text-sm text-amber-600 hover:text-amber-500 transition-colors"
+				>
+					¿Ya tienes cuenta? Inicia sesión aquí
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Footer -->
+<div th:include="usuario/template_usuario.html::footer"></div>
+</body>
+
+</html>
