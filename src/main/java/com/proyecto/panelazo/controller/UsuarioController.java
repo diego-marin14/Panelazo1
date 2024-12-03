@@ -33,7 +33,7 @@ public class UsuarioController {
 	@Autowired
 	private IOrdenService ordenService;
 	
-	BCryptPasswordEncoder passEncode=new BCryptPasswordEncoder();
+	BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
 	
 	// /usuario/registro
 	@GetMapping("/registro")
@@ -45,10 +45,10 @@ public class UsuarioController {
 	public String save(Usuario usuario) {
 		logger.info("Usuario registro: {}",usuario);
 		usuario.setTipo("USER");
-		usuario.setPassword(passEncode.encode(usuario.getPassword()));
+		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 		usuarioService.save(usuario);
 		
-		return "redirect:/";
+		return "redirect:/verify";
 	}
 	
 	@GetMapping("/login")
@@ -56,27 +56,38 @@ public class UsuarioController {
 		
 		return "usuario/login";
 	}
-	
-	@GetMapping("/acceder")
+
+	@PostMapping("/acceder")
 	public String acceder(Usuario usuario, HttpSession session) {
-		logger.info("Accesos : {}",usuario);
-		
-		Optional<Usuario> user= usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString()));
-		//logger.info("Usuario de DB: {}", user.get());
-		
-		if(user.isPresent()) {
+		logger.info("Intento de acceso: {}", usuario.getUsername());
+
+		// Buscar el usuario por nombre de usuario o correo electrónico
+		Optional<Usuario> user = usuarioService.findByEmail(usuario.getUsername());
+
+
+
+		if (user.isPresent() && passwordEncoder.matches(usuario.getPassword(), user.get().getPassword())) {
+			// Configurar atributos de sesión
 			session.setAttribute("idusuario", user.get().getId());
-			if(user.get().getTipo().equals("ADMIN")) {
+			session.setAttribute("username", user.get().getUsername());
+			session.setAttribute("role", user.get().getTipo());
+
+			logger.info("Acceso exitoso para el usuario: {}", user.get().getUsername());
+			if(!user.get().isVerificado()){
+				return "redirect:/verify";
+			}
+			// Redirigir según el rol del usuario
+			if (user.get().getTipo().equalsIgnoreCase("ADMIN")) {
 				return "redirect:/administrador";
-			}else {
+			} else {
 				return "redirect:/";
 			}
-		}else {
-			logger.info("Usuario no existe");
+		} else {
+			logger.warn("Usuario no encontrado o contraseña incorrecta.");
+			session.setAttribute("loginError", "Usuario o contraseña incorrectos.");
 		}
-		
-		return "redirect:/";
-		
+
+		return "redirect:/usuario/login";  // Redirige de vuelta a la página de login
 	}
 	
 	@GetMapping("/compras")

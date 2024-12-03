@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Verificación de cuenta</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+<div class="flex justify-center items-center min-h-screen">
+    <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-md">
+        <div class="flex flex-col items-center text-center">
+            <div class="bg-blue-50 p-3 rounded-full mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 2L12 8L6 2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 22L12 16L18 22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h1 class="text-2xl font-bold text-gray-800 mb-2">Introduce el código de verificación</h1>
+            <p class="text-gray-600 mb-6">Te hemos enviado un código de verificación a tu correo electrónico. Ingresa el código abajo para verificar tu cuenta.</p>
+
+            <!-- Formulario de verificación -->
+            <form th:action="@{/verify}" method="post" class="w-full">
+                <div class="flex justify-center gap-2 mb-6">
+                    <!-- Campo para el código de 6 dígitos -->
+                    <input type="text" name="code" maxlength="1" class="w-12 h-12 text-center text-xl font-semibold border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none transition-all" />
+                    <input type="text" name="code" maxlength="1" class="w-12 h-12 text-center text-xl font-semibold border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none transition-all" />
+                    <input type="text" name="code" maxlength="1" class="w-12 h-12 text-center text-xl font-semibold border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none transition-all" />
+                    <input type="text" name="code" maxlength="1" class="w-12 h-12 text-center text-xl font-semibold border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none transition-all" />
+                    <input type="text" name="code" maxlength="1" class="w-12 h-12 text-center text-xl font-semibold border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none transition-all" />
+                    <input type="text" name="code" maxlength="1" class="w-12 h-12 text-center text-xl font-semibold border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none transition-all" />
+                </div>
+
+                <div class="space-y-4">
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+                        Verificar Cuenta
+                    </button>
+                    <button type="button" class="w-full bg-gray-50 hover:bg-gray-100 text-gray-700 font-semibold py-2 px-4 rounded-lg transition duration-200">
+                        Reenviar Código
+                    </button>
+                </div>
+            </form>
+
+            <!-- Mensaje de error -->
+            <div th:if="${error}" class="mt-4 text-red-500 text-sm">
+                <p th:text="${error}"></p>
+            </div>
+
+            <div class="mt-6 text-sm text-gray-500">
+                ¿No recibiste el código? Revisa tu carpeta de spam.
+            </div>
+
+            <a class="mt-4 text-blue-600 hover:text-blue-700 flex items-center gap-1 text-sm font-medium" onclick="window.location.href='/'">
+                th:href="@{/usuario/login}"
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 12H5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Volver al inicio de sesión
+            </a>
+        </div>
+    </div>
+</div>
+<script>
+    document.querySelectorAll('input').forEach((input, index, inputs) => {
+        input.addEventListener('input', function() {
+            if (input.value.length === 1 && index < inputs.length - 1) {
+                inputs[index + 1].focus();
+            }
+        });
+
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Backspace' && input.value === '') {
+                if (index > 0) {
+                    inputs[index - 1].focus();
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
+
