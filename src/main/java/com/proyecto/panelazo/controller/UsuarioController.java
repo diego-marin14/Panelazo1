@@ -78,7 +78,7 @@ public class UsuarioController {
 			}
 			// Redirigir según el rol del usuario
 			if (user.get().getTipo().equalsIgnoreCase("ADMIN")) {
-				return "redirect:/administrator";
+				return "redirect:/administrador";
 			} else {
 				return "redirect:/";
 			}
