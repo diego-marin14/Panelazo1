@@ -42,12 +42,12 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/save")
-	public String save(Usuario usuario) {
+	public String save(Usuario usuario,HttpSession session) {
 		logger.info("Usuario registro: {}",usuario);
 		usuario.setTipo("USER");
 		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-		usuarioService.save(usuario);
-		
+		Usuario user= usuarioService.save(usuario);
+		session.setAttribute("idusuario", user.getId());
 		return "redirect:/verify";
 	}
 	
